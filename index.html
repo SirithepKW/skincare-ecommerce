@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skincare Ecommerce — CSI204 Workshop #1</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f6f2;
+      color: #2c2c2c;
+      line-height: 1.7;
+    }
+
+    header {
+      background: #2c2c2c;
+      color: #f9f6f2;
+      padding: 48px 32px 36px;
+    }
+
+    header p.label {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #c9a97a;
+      margin-bottom: 10px;
+    }
+
+    header h1 {
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    header p.sub {
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    nav {
+      background: #fff;
+      border-bottom: 1px solid #e8e0d8;
+      padding: 0 32px;
+      display: flex;
+      gap: 4px;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 14px 18px;
+      font-size: 14px;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    nav button:hover { color: #2c2c2c; }
+
+    nav button.active {
+      color: #2c2c2c;
+      border-bottom-color: #c9a97a;
+      font-weight: 500;
+    }
+
+    main {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* Markdown styles */
+    #md-output h1 { font-size: 24px; margin: 32px 0 12px; color: #2c2c2c; }
+    #md-output h2 { font-size: 19px; margin: 28px 0 10px; padding-bottom: 6px; border-bottom: 1px solid #e8e0d8; color: #2c2c2c; }
+    #md-output h3 { font-size: 15px; margin: 20px 0 8px; color: #444; }
+    #md-output p  { margin-bottom: 12px; color: #444; }
+    #md-output ul, #md-output ol { padding-left: 20px; margin-bottom: 12px; color: #444; }
+    #md-output li { margin-bottom: 4px; }
+    #md-output table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+    #md-output th { background: #2c2c2c; color: #f9f6f2; padding: 10px 14px; text-align: left; }
+    #md-output td { padding: 9px 14px; border-bottom: 1px solid #e8e0d8; }
+    #md-output tr:nth-child(even) td { background: #faf7f4; }
+    #md-output code { background: #f0ece6; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+    #md-output pre { background: #2c2c2c; color: #f0ece6; padding: 16px 20px; border-radius: 8px; overflow-x: auto; margin: 16px 0; }
+    #md-output pre code { background: none; padding: 0; color: inherit; }
+    #md-output strong { color: #2c2c2c; }
+    #md-output blockquote { border-left: 3px solid #c9a97a; padding-left: 16px; color: #666; margin: 16px 0; }
+
+    /* Cards for overview tab */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e8e0d8;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .card .icon { font-size: 24px; margin-bottom: 10px; }
+    .card h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .card p { font-size: 13px; color: #666; }
+
+    .badge {
+      display: inline-block;
+      background: #f0ece6;
+      color: #7a5c3a;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin: 2px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #999;
+      margin: 28px 0 12px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px;
+      font-size: 13px;
+      color: #aaa;
+      border-top: 1px solid #e8e0d8;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <p class="label">CSI204 · Workshop #1 · Project Documentation</p>
+  <h1>🛍️ Skincare Ecommerce</h1>
+  <p class="sub">ระบบร้านค้าออนไลน์ผลิตภัณฑ์ดูแลผิวพรรณ · React + Node.js + PostgreSQL</p>
+</header>
+
+<nav>
+  <button class="active" onclick="switchTab('overview', this)">ภาพรวม</button>
+  <button onclick="switchTab('analysis', this)">Analysis & Design</button>
+</nav>
+
+<main>
+
+  <!-- Tab: Overview -->
+  <div id="tab-overview" class="tab-content active">
+
+    <p class="section-title">เกี่ยวกับโปรเจกต์</p>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🎯</div>
+        <h3>วัตถุประสงค์</h3>
+        <p>พัฒนาเว็บไซต์ขายสินค้า Skincare ออนไลน์ครบวงจร</p>
+      </div>
+      <div class="card">
+        <div class="icon">👤</div>
+        <h3>ผู้ใช้งาน</h3>
+        <p>ลูกค้าทั่วไป และผู้ดูแลระบบ (Admin)</p>
+      </div>
+      <div class="card">
+        <div class="icon">🌐</div>
+        <h3>ประเภทแพลตฟอร์ม</h3>
+        <p>Web Platform (E-Commerce)</p>
+      </div>
+      <div class="card">
+        <div class="icon">📦</div>
+        <h3>สินค้า</h3>
+        <p>Cleanser, Serum, Moisturizer, Sunscreen</p>
+      </div>
+    </div>
+
+    <p class="section-title">Tech Stack</p>
+    <div>
+      <span class="badge">React.js</span>
+      <span class="badge">Node.js</span>
+      <span class="badge">Express.js</span>
+      <span class="badge">PostgreSQL</span>
+      <span class="badge">REST API</span>
+      <span class="badge">JWT Auth</span>
+      <span class="badge">GitHub Pages</span>
+    </div>
+
+    <p class="section-title">ฟีเจอร์หลัก</p>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🛒</div>
+        <h3>ฝั่งลูกค้า</h3>
+        <p>ค้นหาสินค้า · ตะกร้า · ชำระเงิน · ติดตามคำสั่งซื้อ · รีวิว</p>
+      </div>
+      <div class="card">
+        <div class="icon">⚙️</div>
+        <h3>ฝั่ง Admin</h3>
+        <p>Dashboard · จัดการสินค้า · จัดการคำสั่งซื้อ · รายงานยอดขาย</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Tab: Analysis -->
+  <div id="tab-analysis" class="tab-content">
+    <div id="md-output">กำลังโหลดเอกสาร...</div>
+  </div>
+
+</main>
+
+<footer>
+  CSI204 Digital Platform for Software Development · Skincare Ecommerce Workshop #1
+</footer>
+
+<script>
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+
+    if (name === 'analysis') loadAnalysis();
+  }
+
+  function loadAnalysis() {
+    const el = document.getElementById('md-output');
+    if (el.dataset.loaded) return;
+
+    fetch('docs/analysis.md')
+      .then(r => r.text())
+      .then(md => {
+        el.innerHTML = marked.parse(md);
+        el.dataset.loaded = 'true';
+      })
+      .catch(() => {
+        el.innerHTML = '<p style="color:#999">ไม่พบไฟล์ analysis.md — ตรวจสอบว่าไฟล์อยู่ใน <code>docs/analysis.md</code></p>';
+      });
+  }
+</script>
+
+</body>
+</html>
